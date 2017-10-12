@@ -1,3 +1,6 @@
 .header-text{
   font-family: 'Nosifer', cursive;
 }
+#randomWord{
+  letter-spacing: 10px;
+}
