@@ -37,7 +37,8 @@ for (var i = 0; i < word.length; i++) {
 }
   document.getElementById('guessedLetters').textContent = "";
   document.getElementById("imgAnimal").src = wordsSrc[words.indexOf(word)];
-  document.getElementById("animalSound").src = soundSrc[words.indexOf(word)];
+  //document.getElementById("animalSound").src = soundSrc[words.indexOf(word)];
+  document.getElementById("animalSound").src = `assets/sound/${word}.mp3`
 
 }
 
@@ -50,8 +51,9 @@ function resetGame(word, guessedWord)
     //show success status message
     document.getElementById("success-div").style.display = "block";
     reset = true;
-    var soundDiv = document.getElementById("soundDiv");
-    soundDiv.play();
+    var audio = document.getElementById("soundDiv");
+    audio.load();
+    audio.play();
     console.log("playing sound");
   }
   else{
