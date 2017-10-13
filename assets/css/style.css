@@ -14,3 +14,14 @@ body{
 .panel{
   font-size: 18px;
 }
+.img{
+  height: 250px;
+  width : 430px;
+}
+td, tr{
+    border: none;
+    width: 100%;
+}
+table{
+  margin-bottom: 100px;
+}

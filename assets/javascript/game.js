@@ -1,16 +1,23 @@
 
     // Creates an array that lists out all of the options (Rock, Paper, or Scissors).
-    var words = ["red","green","blue","pink"];
+    var words = ["camel","dog","elephant","monkey","tiger","wolf"];
     var word =""
     var userGuess;
+    var wordsSrc = ["assets/images/camel.jpg","assets/images/dog.jpg","assets/images/elephant.jpg","assets/images/monkey.jpg","assets/images/tiger.jpeg","assets/images/wolf.jpg"];
     var guessedLetter;
 
+    var soundSrc = ["assets/sound/camel.mp3,assets/sound/dog.mp3,assets/sound/elephant.mp3,assets/sound/monkey.mp3,assets/sound/tiger.mp3,assets/sound/wolf.mp3"];
 
     //Declare variables for win loss draw
     var win = 0;
     var loss = 0;
     var life = 10;
     var reset = false;
+    function hideStatusDiv(){
+      document.getElementById("success-div").style.display = "none";
+      document.getElementById("danger-div").style.display = "none";
+      document.getElementById("info-div").style.display = "none";
+    }
 
 function getRandom(list)
 {
@@ -28,23 +35,42 @@ for (var i = 0; i < word.length; i++) {
   console.log(maskedText.textContent);
   console.log(maskedText.textContent.length);
 }
+  document.getElementById('guessedLetters').textContent = "";
+  document.getElementById("imgAnimal").src = wordsSrc[words.indexOf(word)];
+  document.getElementById("animalSound").src = soundSrc[words.indexOf(word)];
+
 }
 
 function resetGame(word, guessedWord)
 {
+  hideStatusDiv();
   if(word == guessedWord){
     win++;
     document.getElementById('win').textContent = win;
+    //show success status message
+    document.getElementById("success-div").style.display = "block";
+    reset = true;
+    var soundDiv = document.getElementById("soundDiv");
+    soundDiv.play();
+    console.log("playing sound");
   }
   else{
     loss++;
       document.getElementById('loss').textContent = loss;
+      //show danger status message
+      document.getElementById("danger-div").style.display = "block";
+      reset = true;
   }
-   generateSpace('randomWord');
-   document.getElementById('guessedLetters').textContent = "";
-   console.log()
-    life = 10;
-    reset = true;
+  if(reset == false)
+  {
+    var soundDiv = document.getElementById("soundDiv");
+    soundDiv.pause();
+    generateSpace('randomWord');
+    document.getElementById('guessedLetters').textContent = "";
+    console.log("inside reset false" +document.getElementById('guessedLetters').textContent );
+     life = 10;
+     reset = true;
+  }
 }
 
 function setCharAt(str,index,chr) {
@@ -107,15 +133,32 @@ if(guessString.textContent.indexOf(userGuess)< 0)
 window.onload = function(event)
 {
   generateSpace('randomWord');
-  //document.getElementById('randomWord').textContent = getRandom(words);
   document.getElementById('life').textContent = life;
   document.getElementById('win').textContent = win;
   document.getElementById('loss').textContent = loss;
+  //hide all status message
+  hideStatusDiv();
+  //show info status message
+  document.getElementById("info-div").style.display = "block";
 
 }
 
     // This function is run whenever the user presses a key.
 document.onkeyup = function(event) {
-var userGuess = event.key;
-updateDOM(userGuess,word);
-    };
+  if(reset == true)
+  {
+    generateSpace('randomWord');
+
+    life = 10;
+    document.getElementById('life').textContent = 10;
+    //hide all status message
+    hideStatusDiv();
+    //show info status message
+    document.getElementById("info-div").style.display = "block";
+    reset = false;
+  }
+  else{
+    console.log("reset true;")
+    var userGuess = event.key;
+    updateDOM(userGuess,word);
+  }};
