@@ -4,3 +4,13 @@
 #randomWord{
   letter-spacing: 10px;
 }
+body{
+      background: #7e8f25 url("../images/jungle.jpg") no-repeat right top;
+      color: #64731f;
+}
+.container{
+  background: #ffffff;
+}
+.panel{
+  font-size: 18px;
+}
