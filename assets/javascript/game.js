@@ -31,9 +31,6 @@ word = getRandom(words);
 maskedText.textContent = "";
 for (var i = 0; i < word.length; i++) {
   maskedText.textContent  += "_";
-  console.log(word);
-  console.log(maskedText.textContent);
-  console.log(maskedText.textContent.length);
 }
   document.getElementById('guessedLetters').textContent = "";
   document.getElementById("imgAnimal").src = wordsSrc[words.indexOf(word)];
@@ -54,7 +51,6 @@ function resetGame(word, guessedWord)
     var audio = document.getElementById("soundDiv");
     audio.load();
     audio.play();
-    console.log("playing sound");
   }
   else{
     loss++;
@@ -69,7 +65,6 @@ function resetGame(word, guessedWord)
     soundDiv.pause();
     generateSpace('randomWord');
     document.getElementById('guessedLetters').textContent = "";
-    console.log("inside reset false" +document.getElementById('guessedLetters').textContent );
      life = 10;
      reset = true;
   }
@@ -89,8 +84,6 @@ function updateDOM(userGuess,word)
   if(life > 0)
   {
   var tempString = document.getElementById('randomWord').textContent;
-  console.log("Masked Text" + tempString);
-  console.log("Word "+word);
     if((word.indexOf(userGuess) >= 0) && (tempString.indexOf(userGuess) < 0))
     {
       for (var i = 0; i < word.length; i++) {
@@ -121,7 +114,6 @@ if(guessString.textContent.indexOf(userGuess)< 0)
   }
 
 }
-
     //Update life
     life--;
     document.getElementById('life').textContent = life;
@@ -160,7 +152,6 @@ document.onkeyup = function(event) {
     reset = false;
   }
   else{
-    console.log("reset true;")
     var userGuess = event.key;
     updateDOM(userGuess,word);
   }};
